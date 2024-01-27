@@ -1,33 +1,31 @@
 const { Schema, model } = require('mongoose');
+// const { Schema, Types, model } = require('mongoose');
 
-// Schema to create User model
-const userSchema = new Schema(
-  {
-    userId: {
-      type: Schema.Types.ObjectId,
-      default: () => new Types.ObjectId(),
-    },
-    firstName: {
-      type: String,
-      required: true,
-      maxlength: 40,
-    lastName: {
-      type: String,
-      required: true,
-      maxlength: 50,
-    },
+const userSchema = new Schema({
+  username: {
+    type: String,
+    unique: true,
+    required: true,
+    trim: true
   },
-  // {
-  //   // Mongoose supports two Schema options to transform Objects after querying MongoDb: toJSON and toObject.
-  //   // Here we are indicating that we want virtuals to be included with our response, overriding the default behavior
-  //   toJSON: {
-  //     virtuals: true,
-  //   },
-  //   id: false,
-  // }
-  });
+  email: {
+    type: String,
+    unique: true,
+    required: true,
+    match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/, 'Not a valid email address.']
+  },
+//   thoughts: {
+//     type: mongoose.ObjectId,
+//     ref: 'Thought'
+//   },
+//   friends: {
+//     type: mongoose.ObjectId,
+//     ref: 'User'
+//   },
+}, {
+    timestamps: true,       // adds createdAt and updatedAt fields (that MongoDB manages for you)
+});
 
-// Initialize our User model
-const User = model('user', userSchema);
+const User = model('User', userSchema);
 
 module.exports = User;
