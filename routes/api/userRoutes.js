@@ -1,7 +1,5 @@
-
-// Not used yet
-
 const router = require('express').Router();
+
 const {
   getUsers,
   getSingleUser,
@@ -10,7 +8,7 @@ const {
 // /api/users
 router.route('/').get(getUsers);
 
-// /api/users/:userId
-router.route('/:userId').get(getSingleUser);
+// /api/users/:id         -- including populated thought and friend data
+router.route('/:id').get(getSingleUser);
 
 module.exports = router;

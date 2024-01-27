@@ -1,7 +1,3 @@
-
-// Not in use yet
-
-
 const { User } = require('../models');
 
 module.exports = {
@@ -14,10 +10,11 @@ module.exports = {
       res.status(500).json(err);
     }
   },
+
   // Get a single user
   async getSingleUser(req, res) {
     try {
-      const user = await User.findOne({ _id: req.params.userId })
+      const user = await User.findOne({ _id: req.params.userId })         // ?
         .select('-__v');
 
       if (!user) {
