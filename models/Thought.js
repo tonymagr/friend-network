@@ -1,5 +1,7 @@
+// Thought model and schema definition
 const { Schema, model } = require('mongoose');
 
+// Reaction schema is defined first for use in Thought schema and model
 const reactionSchema = new Schema({
   reactionId: {
     type: Schema.Types.ObjectId,
@@ -23,7 +25,8 @@ const reactionSchema = new Schema({
     },
   }
 );
-
+// The combination of the date formatting virtual above and setting this toJSON getters flag to true
+// allow formatting createdAt date. 
 reactionSchema
     .set('toJSON', { getters: true });
 
@@ -49,7 +52,8 @@ const thoughtSchema = new Schema({
     },
   }
 );
-
+// The combination of the date formatting virtual above and setting this toJSON getters flag to true
+// allow formatting createdAt date. 
 thoughtSchema
     .set('toJSON', { getters: true });
 
