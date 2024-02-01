@@ -3,6 +3,11 @@ const router = require('express').Router();
 const {
   getThoughts,
   getSingleThought,
+  createThought,
+  updateThought,
+  deleteThought,
+  createReaction,
+  deleteReaction,
 } = require('../../controllers/thoughtController');
 
 // /api/thoughts
@@ -11,18 +16,19 @@ router.route('/').get(getThoughts);
 // /api/thoughts/:id
 router.route('/:id').get(getSingleThought);
 
-// // Creates a new thought
-// app.post('/new-thought', (req, res) => {
-//   const newThought = new Thought({
-//     thoughtText: req.body.thoughtText
-//     });
-//   newThought.save();
-//   if (newThought) {
-//     res.status(201).json(newThought);
-//   } else {
-//     console.log('Could not create thought');
-//     res.status(500).json({ error: 'Error creating thought' });
-//   }
-// });
+// /api/thoughts
+router.route('/').post(createThought);
+
+// /api/thoughts/:id
+router.route("/:id").put(updateThought);
+
+// /api/thoughts/:id
+router.route("/:id").delete(deleteThought);
+
+// /api/thoughts/:id
+router.route("/:id").post(createReaction);
+
+// /api/thoughts/:id/reaction/:reactionid
+router.route("/:id/reaction/:reactionid").delete(deleteReaction);
 
 module.exports = router;

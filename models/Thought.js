@@ -3,10 +3,7 @@ const { Schema, model } = require('mongoose');
 
 // Reaction schema is defined first for use in Thought schema and model
 const reactionSchema = new Schema({
-  reactionId: {
-    type: Schema.Types.ObjectId,
-    default: () => new Types.ObjectId(),
-  },
+  // reactionId not defined because mongoose auto-generates _id on save. 
   reactionBody: {
     type: String,
     required: true,
@@ -19,7 +16,7 @@ const reactionSchema = new Schema({
 }, {
     timestamps: true,
     virtuals: {
-      createdAtLocal: {
+      reactionCreatedAtLocal: {
         get() { return this.createdAt.toLocaleString('en-US') }
       }
     },
@@ -39,6 +36,11 @@ const thoughtSchema = new Schema({
   },
   username: {
     type: String,
+    required: true,
+  },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
     required: true,
   },
   reactions: [ reactionSchema ],

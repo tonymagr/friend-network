@@ -25,7 +25,7 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-   // Create a new user
+  // Create a new user
   async createUser(req, res) {
     try {
       const newUser = new User({
@@ -54,8 +54,12 @@ module.exports = {
       if (!user) {
         return res.status(404).json({ message: 'No user with that ID' });
       }
-      user.username = req.body.username;
-      user.email = req.body.email;
+      if (req.body.username) {
+        user.username = req.body.username;
+      }
+      if (req.body.email) {
+        user.email = req.body.email;
+      }
       // if thought is not already in the array, then add it
       if (!user.thoughts.includes(req.body.thought)) {
         user.thoughts.push(req.body.thought);
@@ -80,6 +84,48 @@ module.exports = {
       
     } catch (err) {
       result = res.status(500).json(err);
+    }
+  },
+  // Add a friend to a user
+  async addFriend(req, res) {
+    try {
+      const user = await User.findById(req.params.id);
+      if (!user) {
+        return res.status(404).json({ message: 'No user with that ID' });
+      }
+      // if friend is not already in the array, then add it
+      if (!user.friends.includes(req.params.friendId)) {
+        user.friends.push(req.params.friendId);
+      }
+
+      await user.save();
+      res.json(user);
+    } catch (err) {
+      const result = res.status(500).json(err);
+      console.log(result.statusMessage);
+    }
+  },
+  // Remove a friend from a user
+  async removeFriend(req, res) {
+    try {
+      const user = await User.findById(req.params.id);
+      if (!user) {
+        return res.status(404).json({ message: 'No user with that ID' });
+      }
+      // Find index of parameter friend id in user document array.
+      // If not found, error. If found, delete array item by index
+      const index = user.friends.indexOf(req.params.friendId);
+      if (index === -1) {
+        return res.status(404).json({ message: 'No friend with that ID' });
+      } else {
+        user.friends.splice(index, 1);
+      }
+
+      await user.save();
+      res.json(user);
+    } catch (err) {
+      const result = res.status(500).json(err);
+      console.log(result.statusMessage);
     }
   },
 }
