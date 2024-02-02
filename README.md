@@ -1,7 +1,5 @@
 # Friend-Network
 
-<base target="_blank">
-
 ## Author
 Tony Magrady - Berkeley Full-Stack Web Development Bootcamp student, Fall-Winter Session 2023-2024
 
