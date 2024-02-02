@@ -31,9 +31,9 @@ To run locally:
 - Start server and enable database synchronization (npm run dev).
 - Delete all database data (npm run clearCollections).  (There is no seed script.)
 - Message is displayed "App listening on port 3001!", as server runs and waits.
-- Client accessed by (localhost:3001/api/...) to access and update User and Thought data.
-    - Examples: localhost:3001/api/thoughts
-                localhost:3001/api/users/:id/friends/:friendId
+- Client accessed by (localhost:3001/api/...) to access and update User and Thought data.  Examples:
+    - localhost:3001/api/thoughts <br>
+    - localhost:3001/api/users/:id/friends/:friendId
 
 [Demo Link - Part 1](https://app.screencastify.com/v3/watch/3AxbI9mfWfHddiTOMM6f) <br>
 [Demo Link - Part 2](https://app.screencastify.com/v3/watch/nxzdPDkXYQCUkxpoHupR) <br>
