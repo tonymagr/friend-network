@@ -16,30 +16,33 @@ Tony Magrady - Berkeley Full-Stack Web Development Bootcamp student, Fall-Winter
 
 ## Description
 
-This is the back end for a Friend Network social website. It is a No-DB Express application using MongoDB / Mongoose. <br>
+This is the back end /API for a Friend Network social website. It is a NoSQL Express application using MongoDB / Mongoose. With this application, users can share their thoughts, react to others' thoughts, and add to their friend list. Postman app was used to test and demostrate API calls. Linked below is a demonstration of use of the API. <br>
 
 ## Installation
 
-Installed apps include Node.js (Javascript runtime), Express (web app framework), MongoDB (No-DB database), Mongoose, and Dotenv (manages private environment variables for use in code). <br>
-Used Postman local application to test and demostrate API calls.
+Installed apps include Node.js (Javascript runtime), Express (web app framework), MongoDB (NoSQL^^ database), Mongoose (Object Data Madel, ODM), and Dotenv (manages private environment variables for use in code). <br>
+An additional JavaScript date library was not used to format timestamps. Native .toLocaleString method is used for this.
+^^  MongoDB is a database with a non-relational document model. It is a "NoSQL" database in comparison to traditional relational databases.
 
 ## Usage
 
 To run locally:
-- Access the repo root folder (.../friend-network).
+- Access the repo root folder (/friend-network).
 - Start server and enable database synchronization (npm run dev).
+- Delete all database data (npm run clearCollections).  (There is no seed script.)
 - Message is displayed "App listening on port 3001!", as server runs and waits.
-- Client accessed by (localhost:3001/api/...) to access and update User and Thought collections.
-    - Example: localhost:3001/api/users
+- Client accessed by (localhost:3001/api/...) to access and update User and Thought data.
+    - Examples: localhost:3001/api/thoughts
+                localhost:3001/api/users/:id/friends/:friendId
 
 [Demo Link - Part 1](https://app.screencastify.com/v3/watch/3AxbI9mfWfHddiTOMM6f) <br>
 [Demo Link - Part 2](https://app.screencastify.com/v3/watch/nxzdPDkXYQCUkxpoHupR) <br>
 
-![Models and Postman Images](./img/postman.jpg)
+![Postman Image](./img/postman.jpg)
 
 ## Credits
 
-Excellent assistance from weekly tutor Brandon, boot camp instructor, and TAs.
+Excellent assistance from weekly tutor, boot camp instructor, and TAs.
 
 ## License
 
