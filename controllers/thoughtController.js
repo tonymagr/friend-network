@@ -82,8 +82,26 @@ module.exports = {
   async deleteThought(req, res) {
     try {
       const deletedThought = await Thought.findByIdAndDelete(req.params.id);
-      res.json(deletedThought);
+      if (!deletedThought) {
+        return res.status(404).json({ message: 'No thought with that ID' });
+      }
+
+      // Also delete thought id from user array who posted thought 
+      const user = await User.findById(deletedThought.userId);
+      if (!user) {
+        return res.status(404).json({ message: 'No user with that ID' });
+      }
+      // Find index of parameter friend id in user document array.
+      // If not found, error. If found, delete array item by index
+      const index = user.thoughts.indexOf(req.params.id);
+      if (index === -1) {
+        return res.status(404).json({ message: 'No thought with that ID' });
+      } else {
+        user.thoughts.splice(index, 1);
+      }
+      await user.save();
       
+      res.json(deletedThought);
     } catch (err) {
       result = res.status(500).json(err);
     }
@@ -116,12 +134,10 @@ module.exports = {
       if (!thought) {
         return res.status(404).json({ message: 'No thought with that ID' });
       }
-      console.log('thought', thought);
 
       // Find index of parameter reaction id in thought document array.
       // If not found, error. If found, delete array item by index.
       // Used basic for loop instead of indexOf, because object key to compare is in reactions array.
-      console.log('length', thought.reactions.length);
       for (let index = 0; index <= thought.reactions.length; index++) {
         if (index === thought.reactions.length) {
           return res.status(404).json({ message: 'No reaction with that ID' });
