@@ -21,7 +21,7 @@ This is the back end /API for a Friend Network social website. It is a NoSQL Exp
 ## Installation
 
 Installed apps include Node.js (Javascript runtime), Express (web app framework), MongoDB (NoSQL^^ database), Mongoose (Object Data Madel, ODM), and Dotenv (manages private environment variables for use in code). <br>
-An additional JavaScript date library was not used to format timestamps. Native .toLocaleString method is used for this.
+An additional JavaScript date library was not used to format timestamps. Native .toLocaleString method is used for this. <br>
 ^^  MongoDB is a database with a non-relational document model. It is a "NoSQL" database in comparison to traditional relational databases.
 
 ## Usage
